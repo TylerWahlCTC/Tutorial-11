@@ -121,6 +121,36 @@ function setupPuzzle() {
       puzzleCells[i].style.cursor = "url(../imgs/jpf_pencil.png), pointer";
    }
 
+   var filled = document.querySelectorAll("table#hanjieGrid td.filled");
+   var empty = document.querySelectorAll("table#hanjieGrid td.empty");
+
+   document.getElementById("peek").addEventListener("click", function() {
+      for (var i = 0; i < filled.length; i++) {
+         if (filled[i].style.backgroundColor === "rgb(255, 255, 255)"){
+            filled[i].style.backgroundColor = "rgb(255, 211, 211)";
+         }
+      }
+
+      for (var i = 0; i < empty.length; i++) {
+         if (empty[i].style.backgroundColor === "rgb(101, 101, 101)") {
+            empty[i].style.backgroundColor = "rgb(255, 101, 101";
+         }
+      }
+
+      setTimeout(
+         function() {
+            for (var i = 0; i < puzzleCells.length; i++) {
+               if (puzzleCells[i].style.backgroundColor === "rgb(255, 211, 211)") {
+                  puzzleCells[i].style.backgroundColor = "rgb(255, 255, 255)";
+               } 
+               if (puzzleCells[i].style.backgroundColor === "rgb(255, 101, 101)") {
+                  puzzleCells[i].style.backgroundColor = "rgb(101, 101, 101)";
+               }
+            }
+         }, 500);
+   }
+)
+
    // Check the puzzle solutions
    document.getElementById("hanjieGrid").addEventListener("mouseup", function() {
       var solved = true;
@@ -136,6 +166,8 @@ function setupPuzzle() {
       if (solved) alert("You Solved the Puzzle");
    }
 );
+
+
 }
 
 function setBackground(e) {
@@ -174,31 +206,7 @@ function endBackground() {
       puzzleCells[i].removeEventListener("mouseenter", extendBackground);
       puzzleCells[i].style.cursor = "url(../imgs/jpf_pencil.png), pointer";
    }
-
-   var filled = document.querySelectorAll("table#hanjieGrid td.filled");
-   var empty = document.querySelectorAll("table#hanjieGrid td.empty");
-
-   document.getElementById("peek").addEventListener("click", function() {
-      // Display incorrect white cell in pink
-      for (var i = 0; i < filled.length; i++) {
-         if (filled[i].style.backgroundColor === "rgb(255, 255, 255)"){
-            filled[i].style.backgroundColor = "rgb(255, 101, 101)";
-         }
-      }
-      setTimeout(
-         function() {
-            for (var i = 0; i < puzzleCells.length; i++) {
-               if (puzzleCells[i].style.backgroundColor === "rgb(255, 211, 211)") {
-                  puzzleCells[i].style.backgroundColor = "rgb(255, 255, 255)";
-               } 
-               if (puzzleCells[i].style.backgroundColor === "rgb(255, 101, 101)") {
-                  puzzleCells[i].style.backgroundColor = "rgb(101, 101, 101)";
-               }
-            }
-         }, 500);
    }
-);
-}
 
 
 
